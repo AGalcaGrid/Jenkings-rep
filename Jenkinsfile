@@ -27,8 +27,8 @@ pipeline {
                     attachLog: true,
                     to: 'agalca@griddynamics.com',
                     subject: 'Automation Testing Report',
-                    body: 'Please find the Allure Playwright report attached for your reference.',
-                    attachmentsPattern: '**/allure-report/**'
+                    body: 'Please find the Playwright report attached for your reference.',
+                     attachmentsPattern: '**/playwright-report/index.html'
                 )
                 archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
                 allure([includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]])
