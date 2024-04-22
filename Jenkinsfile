@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        PATH = "/Users/anastasianeghina/.nvm/versions/node/v14.17.6/bin:$PATH"
+        PATH = "/Users/agalca/.nvm/versions/node/v14.21.3/bin:$PATH"
     }
     stages {
         stage('Install dependencies') {
