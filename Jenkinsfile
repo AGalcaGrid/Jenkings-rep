@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        PATH = "/Users/agalca/.nvm/versions/node/v14.21.3/bin:$PATH"
-    }
     stages {
         stage('Install dependencies') {
             steps {
