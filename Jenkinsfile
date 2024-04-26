@@ -1,20 +1,26 @@
 pipeline {
     agent any
-    tools { nodejs “14” }
+    tools { nodejs "14" }
     stages {
-        stage('Install dependencies') {
+        stage('Build') {
             steps {
-                sh 'npm install'
+                node {
+                    sh 'npm install'
+                }
             }
         }
-        stage('Run tests') {
+        stage('Test') {
             steps {
-                sh 'npx playwright test'
+                node {
+                    sh 'npx playwright test'
+                }
             }
         }
-        stage('Generate Allure report') {
+        stage('Report') {
             steps {
-                sh 'allure generate allure-results -o allure-report --clean'
+                node {
+                    sh 'allure generate allure-results -o allure-report --clean'
+                }
             }
         }
     }
@@ -26,7 +32,7 @@ pipeline {
                     to: 'agalca@griddynamics.com',
                     subject: 'Automation Testing Report',
                     body: 'Please find the Playwright report attached for your reference.',
-                     attachmentsPattern: '**/playwright-report/index.html'
+                    attachmentsPattern: '**/playwright-report/index.html'
                 )
                 archiveArtifacts artifacts: 'allure-report/**', allowEmptyArchive: true
                 allure([includeProperties: false, jdk: '', properties: [], reportBuildPolicy: 'ALWAYS', results: [[path: 'allure-results']]])
